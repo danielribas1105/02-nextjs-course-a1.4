@@ -13,8 +13,8 @@ export async function getStaticPaths() {
   const paths = dados.posts.map((postAtual) => {
     return { params: { id: `${postAtual.id}` } };
   })
-  console.log('dados:', dados);
-  console.log('paths:', paths);
+  //console.log('dados:', dados);
+  //console.log('paths:', paths);
 
   return {
     paths: paths,
@@ -22,8 +22,9 @@ export async function getStaticPaths() {
   };
 }
 
+/* só roda em tempo de build */
 export async function getStaticProps(context) {
-  console.log('Contexto', context.params.id);
+  //console.log('Contexto', context.params.id);
   const id = context.params.id;
 
   const post = dados.posts.find((currentPost) => {
@@ -33,14 +34,14 @@ export async function getStaticProps(context) {
     return false;
   })
 
-  console.log(post);
+  //console.log(post);
 
   return {
     props: {
       id: post.id,
-      title: /* `Post: [${context.params.id}]`  */post.title,
-      date: /* `11/11/1111` */post.date,
-      content: /* `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.` */post.content,
+      title: post.title,
+      date: post.date,
+      content: post.content,
     }, 
   }
 }
